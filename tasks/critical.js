@@ -114,10 +114,13 @@ module.exports = function(grunt) {
             destination = path.join(f.dest, opts.src);
           }
           grunt.log.debug('opts', opts);
+		  grunt.log.debug('specops', opts.minify);
 
           critical.generate(opts).then(function(output) {
             var dirname = path.dirname(destination);
+			if(opts.escapestrings) {
             output = addslashes(output);
+			}
             if (!grunt.file.isDir(dirname)) {
               grunt.file.mkdir(dirname);
             }
